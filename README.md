@@ -9,3 +9,13 @@ criar um role para o service do ecs poder assumir, iam.tf
 criar o ecr, ecr.tf
 
 criar o recurso do cloudwatch, cloudwatch.tf
+
+criar a task_definition que é a forminha das tasks, task_definitions.tf
+
+criar os target_group para export os services, target_group.tf
+
+criar o security group do service, sg.tf
+
+criar o service que derá vida para nossa aplicação, anexar o load_balancer no service, service.tf
+
+criar uma listener_rule para associar o target_group ao load balancer, listener_rule.tf

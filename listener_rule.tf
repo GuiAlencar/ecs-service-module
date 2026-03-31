@@ -8,7 +8,7 @@ resource "aws_alb_listener_rule" "main" {
 
   condition {
     host_header {
-      values = var.service_hosts
+      values = var.service_hosts # lista de hosts associados ao serviço, geralmente especificados para configurações DNS.
     }
   }
   
