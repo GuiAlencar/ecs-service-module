@@ -19,3 +19,6 @@ criar o security group do service, sg.tf
 criar o service que derá vida para nossa aplicação, anexar o load_balancer no service, service.tf
 
 criar uma listener_rule para associar o target_group ao load balancer, listener_rule.tf
+
+criar o autoscaling, autoscaling.tf
+criar o autoscaling_cpu criando então uma política de autoscaling cpu_high e cpu_low e depois anexa no alarme do cloudwatch em aws_cloudwatch_metric_alarm.cpu_high e aws_cloudwatch_metric_alarm.cpu_low, autoscaling_cpu.tf
