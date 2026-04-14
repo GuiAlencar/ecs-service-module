@@ -22,3 +22,7 @@ criar uma listener_rule para associar o target_group ao load balancer, listener_
 
 criar o autoscaling, autoscaling.tf
 criar o autoscaling_cpu criando então uma política de autoscaling cpu_high e cpu_low e depois anexa no alarme do cloudwatch em aws_cloudwatch_metric_alarm.cpu_high e aws_cloudwatch_metric_alarm.cpu_low, autoscaling_cpu.tf
+
+criar autoscaling_tracking_cpu mantem o valor da cpu da minhas tasks, autoscaling_tracking_cpu.tf
+
+criar autoscaling_tracking_requests, autoscaling_tracking_requests.tf

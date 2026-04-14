@@ -27,7 +27,8 @@ resource "aws_ecs_service" "main" {
   #   capacity_provider = var.service_launch_type
   #   weight            = 100
   # } 
-
+  
+  # estrategia de colocação para distribuir as tarefas entre as zonas de disponibilidade
   dynamic "ordered_placement_strategy" {
     for_each = var.service_launch_type == "EC2" ? [1] : []
     content {
