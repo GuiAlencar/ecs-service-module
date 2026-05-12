@@ -26,3 +26,11 @@ criar o autoscaling_cpu criando então uma política de autoscaling cpu_high e c
 criar autoscaling_tracking_cpu mantem o valor da cpu da minhas tasks, autoscaling_tracking_cpu.tf
 
 criar autoscaling_tracking_requests, autoscaling_tracking_requests.tf
+
+### MUDANDO AS TASKS PARA FARGATE
+PRIMEIRO PASSO
+ não temos controle em qual região essas tasks irão subir ao usarmos o fargate como capacity provider, então o ordered_placement_strategy que está no arquivo service.tf terá de ser comentado para não dar erro no apply do terraformm, foi criado um dynamic "ordered_placement_strategy" para ele validar se as tasks estão em ec2 ou fargate validando o service_launch_type, service.tf
+
+
+SEGUNDO PASSO
+O launch_type não vai mais funcionar para o uso do fargate, usar então o capacity_provider_strategy, service.tf
