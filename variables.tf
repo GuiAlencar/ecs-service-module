@@ -91,6 +91,15 @@ variable "environment_variables" {
   description = "Lista de variáveis de ambiente que serão passadas para o serviço."
 }
 
+variable "secrets" {
+  type = list(object({
+    name : string
+    valueFrom: string
+  }))
+  description = "Lista de secrets do parameter store ou do secrets manager"
+  default     = []
+}
+
 variable "capabilities" {
   type        = list(string)
   description = "Lista de capacidades, como EC2 ou FARGATE"
