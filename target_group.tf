@@ -1,4 +1,6 @@
 resource "aws_alb_target_group" "main" {
+  count = var.use_lb ? 1 : 0
+  
   name     = substr(format("%s-%s-tg", var.cluster_name, var.service_name), 0, 32)
   port     = var.service_port
   vpc_id   = var.vpc_id

@@ -35,6 +35,26 @@ resource "aws_ecs_service" "main" {
   #   capacity_provider = var.service_launch_type
   #   weight            = 100
   # } 
+
+  dynamic "service_connect_configuration" {
+    for_each = var.use_service_connect ? [var.service_connect_name] : []
+
+    content {
+      enabled   = var.use_service_connect
+      namespace = var.service_connect_name
+
+      service {
+        port_name      = var.service_name
+        discovery_name = var.service_name
+
+        client_alias {
+          port     = var.service_port
+          dns_name = format("%s.%s", var.service_name, var.service_connect_name)
+        }
+      }
+
+    }
+  }
   
   # estrategia de colocação para distribuir as tarefas entre as zonas de disponibilidade
   dynamic "ordered_placement_strategy" {
@@ -56,11 +76,20 @@ resource "aws_ecs_service" "main" {
     assign_public_ip = false
   }
 
-  load_balancer {
-    target_group_arn = aws_alb_target_group.main.arn
-    container_name = var.service_name
-    container_port = var.service_port
+  dynamic "load_balancer" {
+    for_each = var.use_lb ? [1] : []
+    content {
+      target_group_arn = aws_alb_target_group.main[0].arn
+      container_name   = var.service_name
+      container_port   = var.service_port
+    }
   }
+  
+  # load_balancer {
+  #   target_group_arn = aws_alb_target_group.main.arn
+  #   container_name = var.service_name
+  #   container_port = var.service_port
+  # }
 
   lifecycle {
     ignore_changes = [ desired_count ]
